@@ -273,8 +273,7 @@ class Transaksi extends CI_Controller
         $sampai = $this->input->get('sampai');
         if ($dari != "" && $sampai != "") {
             $data['laporan'] = $this->db->query("select * from transaksi, mobil, user where transaksi.id_mobil=mobil.id_mobil and transaksi.id_user=user.id_user and tanggal_sewa between '$dari' and '$sampai'")->result();
-            $data2['laporan'] = $this->db->query("select sum(if(status_pembayaran=2, total_sewa,0)+total_denda) as total_masuk from transaksi");
-            $this->load->view('admin/laporan_transaksi_print', $data,$data2);
+            $this->load->view('admin/laporan_transaksi_print', $data);
         } else {
             redirect('admin/laporan', 'refresh');
         }
